@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Crypt32;
 using Les.Util;
@@ -14,8 +9,7 @@ namespace RdpHelper.Business
 {
     static class  CommonUtils
     {
-        public static string RdpFileTemplate = "screen mode id:i:{0}\r\ndesktopwidth:i:{1}\r\ndesktopheight:i:{2}\r\nsession bpp:i:16\r\nfull address:s:{3}\r\nconnect to console:i:{4}\r\ncompression:i:1\r\nkeyboardhook:i:2\r\naudiomode:i:2\r\nredirectdrives:i:1\r\nredirectprinters:i:0\r\nredirectcomports:i:0\r\nredirectsmartcards:i:0\r\ndisplayconnectionbar:i:1\r\nautoreconnection enabled:i:1\r\ndomain:s:{5}\r\nusername:s:{6}\r\npassword 51:b:{7}\r\nauthentication level:i:0\r\nprompt for credentials:i:0\r\ndisable wallpaper:i:0\r\ndisable full window drag:i:1\r\ndisable themes:i:0\r\ndisable cursor setting:i:1\r\nbitmapcachepersistenable:i:1";
-
+        public const string RDP_FILE_TEMPLATE = "screen mode id:i:{0}\r\ndesktopwidth:i:{1}\r\ndesktopheight:i:{2}\r\nsession bpp:i:16\r\nfull address:s:{3}\r\nconnect to console:i:{4}\r\ncompression:i:1\r\nkeyboardhook:i:2\r\naudiomode:i:2\r\nredirectdrives:i:1\r\nredirectprinters:i:0\r\nredirectcomports:i:0\r\nredirectsmartcards:i:0\r\ndisplayconnectionbar:i:1\r\nautoreconnection enabled:i:1\r\ndomain:s:{5}\r\nusername:s:{6}\r\npassword 51:b:{7}\r\nauthentication level:i:0\r\nprompt for credentials:i:0\r\ndisable wallpaper:i:0\r\ndisable full window drag:i:1\r\ndisable themes:i:0\r\ndisable cursor setting:i:1\r\nbitmapcachepersistenable:i:1";
      
         public static void StartRdp(RdpWrapVO vo)
         {
@@ -67,13 +61,20 @@ namespace RdpHelper.Business
         /// <returns></returns>
         public static string EncodeRdpProto(RdpWrapVO vo)
         {
-            //只有密码项需要加密
+            string screenMode = vo.screenMode;
+            string desktopWidth = vo.desktopWidth;
+            string desktopHeight = vo.desktopHeight;
+            string server = vo.server;
+            string consoleSession = vo.consoleSession;
+            string domain = vo.domain;
+            string userName = vo.userName;
+            //密码项需要加密
             string password = DPAPI.Encrypt(vo.password).Replace("-", "");
 
             //todo 其他内容的拼装
 
-            return string.Format(RdpFileTemplate, vo.screenMode, vo.desktopWidth, vo.desktopHeight, vo.server,
-                 vo.consoleSession, vo.domain, vo.userName, password);
+            return string.Format(RDP_FILE_TEMPLATE, screenMode, desktopWidth, desktopHeight, server,
+                 consoleSession, domain, userName, password);
         }
     }
 }

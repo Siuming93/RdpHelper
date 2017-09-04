@@ -70,10 +70,10 @@ namespace RdpHelper.Business.View.RdpMain
             // 
             // buttonSend
             // 
-            buttonSend.Location = new System.Drawing.Point(88 -78, 131 + offsetY);
+            buttonSend.Location = new System.Drawing.Point(88 - 78, 131 + offsetY);
             buttonSend.Name = "buttonSend" + index;
             buttonSend.Size = new System.Drawing.Size(75, 23);
-            buttonSend.TabIndex = 0;
+            buttonSend.TabIndex = 1000 + index * 3;
             buttonSend.Text = "发送";
             buttonSend.UseVisualStyleBackColor = true;
             buttonSend.Click += OnSendBtnClick;
@@ -84,7 +84,7 @@ namespace RdpHelper.Business.View.RdpMain
             textBoxTarget.Name = "textBoxTarget" + index;
             textBoxTarget.ReadOnly = true;
             textBoxTarget.Size = new System.Drawing.Size(108, 21);
-            textBoxTarget.TabIndex = 1;
+            textBoxTarget.TabIndex = 2000 + index * 3;
             textBoxTarget.Text = vo.server;
             // 
             // textBoxProto
@@ -93,7 +93,7 @@ namespace RdpHelper.Business.View.RdpMain
             textBoxProto.Name = "textBoxProto" + index;
             textBoxProto.ReadOnly = true;
             textBoxProto.Size = new System.Drawing.Size(471, 21);
-            textBoxProto.TabIndex = 2;
+            textBoxProto.TabIndex = 3000 + index * 3;
             textBoxProto.Text = CommonUtils.EncodeRdpProto(vo);
 
             this.panelItemList.Controls.Add(buttonSend);
