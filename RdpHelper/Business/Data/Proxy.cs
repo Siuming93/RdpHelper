@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace RdpHelper.Business.Data
 {
@@ -19,6 +22,25 @@ namespace RdpHelper.Business.Data
                 _list.Add(new RdpWrapVO() { server = "192.168.0." + i.ToString(), password = "s", userName = "user1" });
             }
         }
+
+        private IAsyncResult DoRequest()
+        {
+            var request = HttpWebRequest.Create("");
+            request.Method
+
+            return request.BeginGetResponse(OnRespnse, null);
+        }
+
+        private System.Threading.Tasks.Task<WebResponse> GetResponse()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnRespnse(IAsyncResult ar)
+        {
+            //if()
+        }
+
         private static Proxy _proxy;
         public static Proxy Instance {
             get
