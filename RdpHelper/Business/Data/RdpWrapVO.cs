@@ -18,6 +18,15 @@
         /// </summary>
         public string tail;
 
+        public RdpWrapVO(object element)
+        {
+            //todo 初始化
+        }
+
+        public RdpWrapVO()
+        {
+        }
+
         public static RdpWrapVO FakeVO(string id)
         {
             return new RdpWrapVO() { id = id};
